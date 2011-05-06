@@ -316,5 +316,4 @@ MLayer.layer.BaseLayer.prototype = {
          */
     }
 }
-}
 

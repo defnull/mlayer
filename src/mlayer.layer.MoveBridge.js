@@ -1,3 +1,4 @@
+// REQUIRE mlayer.base.js
 /* This layer does not draw anything, but relays movements to a different map.
    It is used to synchronize two or more maps.
 */

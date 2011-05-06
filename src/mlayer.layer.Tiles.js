@@ -1,3 +1,5 @@
+// REQUIRE mlayer.base.js
+
 MLayer.layer.Tiles = MLayer.extend(MLayer.layer.BaseLayer, {
     init: function(config) {
         // Position and number of currently displayed tiles

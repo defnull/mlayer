@@ -1,3 +1,6 @@
+// REQUIRE mlayer.base.js
+// REQUIRE mlayer.layer.Tiles.js
+
 MLayer.layer.LucullusView = MLayer.extend(MLayer.layer.Tiles, {
     init: function(config) {
         var self = this;

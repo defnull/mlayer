@@ -1,3 +1,5 @@
+// REQUIRE mlayer.base.js
+
 MLayer.layer.Controls = MLayer.extend(MLayer.layer.BaseLayer, {
     is_hud: true,
     init: function(config) {
