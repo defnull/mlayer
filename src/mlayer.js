@@ -237,20 +237,20 @@ if(typeof MLayer == 'undefined') {
             jQuery.each(this.huds, function(){ this.onZoom(view) });
 
             // Get old and new extend
-            var obox = this.base.getExtend(old);
-            var nbox = this.base.getExtend(level);
+            var obox = this.base.getExtent(old);
+            var nbox = this.base.getExtent(level);
 
             // Calculate center of current viewport in old extend
             var cx = view.left + view.width  / 2;
             var cy = view.top  + view.height / 2;
 
             // Calculate relative position of center within old extend
-            var ox = (obox.right  - obox.left) / (cx - obox.left);
-            var oy = (obox.bottom - obox.top)  / (cy - obox.top);
+            var ox = (cx - obox.left) / (obox.right  - obox.left);
+            var oy = (cy - obox.top)  / (obox.bottom - obox.top);
 
             // Calculate position of center in new extend
-            var nx = nbox.left + ox * (obox.right  - obox.left);
-            var ny = nbox.top  + oy * (obox.bottom - obox.top);
+            var nx = nbox.left + ox * (nbox.right  - nbox.left);
+            var ny = nbox.top  + oy * (nbox.bottom - nbox.top);
 
             // Move to new center and redraw.
             this.moveTo(nx - view.width/2, ny - view.height/2);

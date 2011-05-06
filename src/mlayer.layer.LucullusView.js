@@ -14,12 +14,12 @@ MLayer.layer.LucullusView = MLayer.extend(MLayer.layer.Tiles, {
         }, this)
     },
     getExtent: function(zoom) {
-    	var scale = Math.pow(2, zoom/10)
+        var scale = Math.pow(2, zoom/10)
         return {
-        	top: this.view.state.offset[0] * scale,
-        	left: this.view.state.offset[1] * scale,
-        	bottom: this.view.state.size[0] * scale,
-        	right: this.view.state.size[1] * scale,
+            top: this.view.state.offset[0] * scale,
+            left: this.view.state.offset[1] * scale,
+            bottom: this.view.state.size[0] * scale,
+            right: this.view.state.size[1] * scale,
         }
     }
 })
