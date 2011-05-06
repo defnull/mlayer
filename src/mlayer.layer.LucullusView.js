@@ -13,16 +13,11 @@ mlayer.layer.LucullusView = mlayer.extend(mlayer.layer.Tiles, {
         this.view = config.view;
         this.view.on('change', function(view) {
             this.covered = {top:0, left:0, bottom:0, right:0};
+            this.offset.top = this.view.state.offset[0]
+            this.offset.left = this.view.state.offset[1]
+            this.size.width = this.view.state.size[0]
+            this.size.height = this.view.state.size[1]
             if(this.map) this.map.moveBy(0,0);
         }, this)
-    },
-    getExtent: function(zoom) {
-        var scale = Math.pow(2, zoom/10)
-        return {
-            top: this.view.state.offset[0] * scale,
-            left: this.view.state.offset[1] * scale,
-            bottom: this.view.state.size[0] * scale,
-            right: this.view.state.size[1] * scale,
-        }
     }
 })

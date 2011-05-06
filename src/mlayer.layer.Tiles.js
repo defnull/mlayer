@@ -6,6 +6,8 @@ mlayer.layer.Tiles = mlayer.extend(mlayer.layer.BaseLayer, {
         this.covered = {top:0, left:0, bottom:0, right:0}
         this.tilesize = config.tilesize || 256;
         this.offset = config.offset || {top:0, left:0}
+        this.size = config.size || {width:0, height:0}
+        
         // Number of tiles to draw in advance
         this.buffer = config.buffer || 0;
         if(typeof config.url == 'string') {
@@ -21,6 +23,15 @@ mlayer.layer.Tiles = mlayer.extend(mlayer.layer.BaseLayer, {
         }
         if(typeof config.url == 'function')
             this.url = config.url;
+    },
+    getExtent: function(zoom) {
+        var scale = Math.pow(2, zoom/10)
+        return {
+            top: this.offset.top * scale,
+            left: this.offset.left * scale,
+            bottom: (this.offset.top + this.size.height) * scale,
+            right: (this.offset.left + this.size.width) * scale,
+        }
     },
     onDraw: function(vp) {
         if(!this.url) return;
