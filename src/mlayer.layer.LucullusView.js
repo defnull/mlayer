@@ -1,13 +1,13 @@
 // REQUIRE mlayer.base.js
 // REQUIRE mlayer.layer.Tiles.js
 
-MLayer.layer.LucullusView = MLayer.extend(MLayer.layer.Tiles, {
+mlayer.layer.LucullusView = mlayer.extend(mlayer.layer.Tiles, {
     init: function(config) {
         var self = this;
         config.url = function(x, y, z, ts) {
             return self.view.image(self.channel, x*ts, y*ts, z, ts, ts, 'png')
         }
-        MLayer.layer.Tiles.prototype.init.call(this, config);
+        mlayer.layer.Tiles.prototype.init.call(this, config);
 
         this.channel = config.channel || 'default'
         this.view = config.view;

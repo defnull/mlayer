@@ -1,8 +1,8 @@
-MLayer = {}
-MLayer.layer = {}
-MLayer.geometry = {}
+mlayer = {}
+mlayer.layer = {}
+mlayer.geometry = {}
 
-MLayer.extend = function(baseclass, override) {
+mlayer.extend = function(baseclass, override) {
     /* Creates a new class with values from $override mixed into the prototype
        of $baseclass. */
 
@@ -32,7 +32,7 @@ MLayer.extend = function(baseclass, override) {
 
 
 
-MLayer.Map = function(node, config) {
+mlayer.Map = function(node, config) {
     // The root DOM node for all map related nodes.
     this.dom = jQuery(node);
     this.dom.css({overflow:'hidden', position:'relative', top:'0px', left:'0px', padding:'0px'})
@@ -83,7 +83,7 @@ MLayer.Map = function(node, config) {
     this.zindex = config.zindex || 100;
 }
 
-MLayer.Map.prototype = {
+mlayer.Map.prototype = {
     start: function() {
         // Layout all layers and start the draw interval.
         if(this._draw_interval !== null) return
@@ -259,7 +259,7 @@ MLayer.Map.prototype = {
     }
 }
 
-MLayer.layer.BaseLayer = function(config) {
+mlayer.layer.BaseLayer = function(config) {
     this.config = config || {}
     this.dom = jQuery('<div />')
     this.dom.css({ position: 'absolute', top: '0px', left: '0px',
@@ -268,7 +268,7 @@ MLayer.layer.BaseLayer = function(config) {
     this.init(config||{})
 }
 
-MLayer.layer.BaseLayer.prototype = {
+mlayer.layer.BaseLayer.prototype = {
     is_base: false,
     init: function(config) {
         /* Called by the constructor. */

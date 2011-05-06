@@ -1,6 +1,6 @@
 // REQUIRE mlayer.base.js
 
-MLayer.layer.Controls = MLayer.extend(MLayer.layer.BaseLayer, {
+mlayer.layer.Controls = mlayer.extend(mlayer.layer.BaseLayer, {
     is_hud: true,
     init: function(config) {
         // Position and number of currently displayed tiles

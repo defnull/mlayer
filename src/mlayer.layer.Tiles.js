@@ -1,6 +1,6 @@
 // REQUIRE mlayer.base.js
 
-MLayer.layer.Tiles = MLayer.extend(MLayer.layer.BaseLayer, {
+mlayer.layer.Tiles = mlayer.extend(mlayer.layer.BaseLayer, {
     init: function(config) {
         // Position and number of currently displayed tiles
         this.covered = {top:0, left:0, bottom:0, right:0}

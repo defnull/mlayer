@@ -3,7 +3,7 @@
    It is used to synchronize two or more maps.
 */
 
-MLayer.layer.MoveBridge = MLayer.extend(MLayer.layer.BaseLayer, {
+mlayer.layer.MoveBridge = mlayer.extend(mlayer.layer.BaseLayer, {
     init: function(config) {
         this.target = config.target
         this.scaleX = typeof config.scaleX == 'number' ? config.scaleX : 1;

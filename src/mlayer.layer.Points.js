@@ -1,7 +1,7 @@
 // REQUIRE mlayer.base.js
 /* Draw labeled points and show the label if the mouse is near the point. */
 
-MLayer.layer.PointLayer = MLayer.extend(MLayer.layer.BaseLayer, {
+mlayer.layer.PointLayer = mlayer.extend(mlayer.layer.BaseLayer, {
     init: function(config) {
         // Position and number of currently displayed tiles
         this.points = [];
