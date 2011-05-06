@@ -1,14 +1,14 @@
 import os, re, sys
 
 def combine(filename, skiplist):
-    if not filename.endswith('.js'): return ''
+    if filename.endswith('~'): return ''
     if os.path.basename(filename).startswith('.'): return ''
     if filename in skiplist: return ''
     with open(filename) as fp:
         sys.stderr.write('Reading %r\n' % filename)
         source = ''
         for line in fp:
-            req = re.search('REQUIRE ([a-zA-Z\\.]+)', line)
+            req = re.search('REQUIRE (\\S+)', line)
             if req:
                 req = os.path.join(os.path.dirname(filename), req.group(1))
                 source += combine(req, skiplist)

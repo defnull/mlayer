@@ -1,3 +1,7 @@
+/*
+REQUIRE ../README.rst (yes, I am THAT lazy ;)
+*/
+
 mlayer = {}
 mlayer.layer = {}
 mlayer.geometry = {}
