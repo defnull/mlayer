@@ -48,10 +48,10 @@ mlayer.layer.Tiles = mlayer.extend(mlayer.layer.BaseLayer, {
             var z = vp.zoom;
             for(var x=vleft; x<vright; x++) {
                 for(var y=vtop; y<vbottom; y++) {
-                    html += '<img src="'+this.url(x,y,z,ts)+'" alt="pos: ['+x+' '+y+' '+0+']"'+
-                            ' style="position: absolute;'+
+                    html += '<span style="position: absolute;'+
                             ' width:'+ts+'px; height:'+ts+'px;'+
-                            ' top:'+(y*ts)+'px; left:'+(x*ts)+'px" />';
+                            ' top:'+(y*ts)+'px; left:'+(x*ts)+'px;'+
+                            ' background: transparent url(\''+this.url(x,y,z,ts)+'\')" no-repeat top left" />';
                 }
             }
             this.dom.html(html);
