@@ -10,8 +10,8 @@ Usage
 ======
 
 ::
-	// <div id='map' style='width: 500px; height:400px;'/>
 
+    // <div id='map' style='width: 500px; height:400px;'/>
     var map = new mlayer.Map('#map', {});
     var layer = new mlayer.layer.Tiles({
         url: 'http://example.com/tiles/{size}/{x}-{y}-{z}.png'
