@@ -52,8 +52,6 @@ mlayer.util.DragDrop.prototype = {
         }
         var mouseMove = function(e) {
             if(!self.dragging) return;
-            e.stopPropagation();
-            e.preventDefault();
             self.posLast = self.posCurrent;
             self.posCurrent = [e.pageX, e.pageY];
             self.onMove(self);

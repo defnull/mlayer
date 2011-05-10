@@ -114,25 +114,30 @@ mlayer.Map.prototype = {
         this.dom.hide();
         this.stop();
     },
-
     draw: function() {
         /* Draw each layer and check for a resized viewport.
             This method is called every draw_interval milliseconds and on
             events that drastically change the viewport (e.g. zoom).
         */
-        var vp = this.viewport, dom = this.dom;
-        var w = vp.width, h = vp.height;
-        if(w != dom.innerWidth() || h != dom.innerHeight()) {
+        var vp = this.viewport, maps = this.maps, huds = this.huds;
+        for(var i=0, len=maps.length; i<len;) {maps[i++].onDraw(vp)}
+        for(var i=0, len=huds.length; i<len;) {huds[i++].onDraw(vp)}
+    },
+    resize: function() {
+        /* This MUST be called whenever the root DOM node is resized. */
+        var vp   = this.viewport,
+            maps = this.maps,
+            huds = this.huds,
+            dom  = this.dom;
+        if(vp.width != dom.innerWidth() || vp.height != dom.innerHeight()) {
             vp.width  = dom.innerWidth();
             vp.height = dom.innerHeight();
             vp.bottom = vp.top + vp.height;
             vp.right  = vp.left + vp.width;
             this.huddiv.width(vp.width).height(vp.height)
-            jQuery.each(this.maps, function(){ this.onResize(vp) });
-            jQuery.each(this.huds, function(){ this.onResize(vp) });
+            for(var i=0, len=maps.length; i<len;) {maps[i++].onResize(vp)}
+            for(var i=0, len=huds.length; i<len;) {huds[i++].onResize(vp)}
         }
-        jQuery.each(this.maps, function(){ this.onDraw(vp) })
-        jQuery.each(this.huds, function(){ this.onDraw(vp) })
     },
     layout: function() {
         /* Create HTML nodes for all layers. */
@@ -158,6 +163,7 @@ mlayer.Map.prototype = {
             huddiv.append(this.dom)
         })
         this.max_zindex = zindex;
+        this.resize();
     },
     addLayer: function(layer, base) {
         // Add a new layer object. If the second parameter is true, the layer
@@ -188,7 +194,7 @@ mlayer.Map.prototype = {
             to the left, you actually need to move x*n pixels to the left.
         */
         if(!this.base) return;
-        var view = this.viewport;
+        var view = this.viewport, maps = this.maps, huds = this.huds;
 
         // Default to current position
         if(typeof x != 'number') x = view.left;
@@ -217,8 +223,8 @@ mlayer.Map.prototype = {
         view.bottom += dy;
 
         // Trigger onMove callbacks for all maps.
-        jQuery.each(this.maps, function(){ this.onMove(view) });
-        jQuery.each(this.huds, function(){ this.onMove(view) });
+        for(var i=0, len=maps.length; i<len;) {maps[i++].onMove(view)}
+        for(var i=0, len=huds.length; i<len;) {huds[i++].onMove(view)}
 
         // Actually move the primaty dom node.
         this.mapdiv.css({left: -x+'px', top: -y+'px'});
@@ -237,8 +243,8 @@ mlayer.Map.prototype = {
         view.zoom = level
 
         // Trigger onZoom callbacks for all maps.
-        jQuery.each(this.maps, function(){ this.onZoom(view) });
-        jQuery.each(this.huds, function(){ this.onZoom(view) });
+        for(var i=0, len=this.maps.length; i<len;) {this.maps[i++].onZoom(view)}
+        for(var i=0, len=this.huds.length; i<len;) {this.huds[i++].onZoom(view)}
 
         // Get old and new extend
         var obox = this.base.getExtent(old);

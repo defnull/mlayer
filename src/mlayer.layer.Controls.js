@@ -12,14 +12,16 @@ mlayer.layer.Controls = mlayer.extend(mlayer.layer.BaseLayer, {
     },
     onLayout: function(zindex) {
         var map = this.map;
-        this.control = new mlayer.util.DragDrop({
+        var self = this;
+        this.drag_control = new mlayer.util.DragDrop({
+            dom: this.dom,
             onMove: function(c) {
                 var dx = c.posCurrent[0] - c.posLast[0];
                 var dy = c.posCurrent[1] - c.posLast[1];
                 map.moveBy(-dx, -dy);
             }
         })
-        this.control.setDom(this.dom)
+
         this.joystick = jQuery('<div />').css({
             'background-image': 'url(/img/joystick.png)',
             'background-position': 'center center',
@@ -28,6 +30,22 @@ mlayer.layer.Controls = mlayer.extend(mlayer.layer.BaseLayer, {
             left: '10px',
             width:'40px',
             height:'40px'}).appendTo(this.dom)
+
+        this.joystick_control = new mlayer.util.DragDrop({
+            dom: this.joystick,
+            onDrag: function(c) {
+                self._joystick_interval = window.setInterval(function(){
+                    var dx = Math.ceil((c.posCurrent[0] - c.posStart[0])/10);
+                    var dy = Math.ceil((c.posCurrent[1] - c.posStart[1])/10);
+                    map.moveBy(dx, dy);
+                }, 50)
+            },
+            onDrop: function(c) {
+                window.clearInterval(self._joystick_interval);
+                self._joystick_interval = null;
+            }
+        })
+
         this.status.css({top: '5px', left: (map.viewport.width-50)+'px'})
         return 0;
     },

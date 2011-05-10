@@ -33,13 +33,12 @@ mlayer.layer.Tiles = mlayer.extend(mlayer.layer.BaseLayer, {
             right: (this.offset.left + this.size.width) * scale,
         }
     },
-    onDraw: function(vp) {
+    onDraw: function(view) {
         if(!this.url) return;
 
-        var view = vp;
         var cov = this.covered;
         var ts = this.tilesize;
-        var ext = this.getExtent(vp.zoom);
+        var ext = this.getExtent(view.zoom);
         var off = this.offset;
 
         // Calculate visible tiles (including border)
@@ -47,6 +46,7 @@ mlayer.layer.Tiles = mlayer.extend(mlayer.layer.BaseLayer, {
         var vleft   = Math.floor(view.left   / ts) - this.buffer;
         var vbottom = Math.ceil( view.bottom / ts) + this.buffer;
         var vright  = Math.ceil( view.right  / ts) + this.buffer;
+
         // Clip visible tiles on extent
         vtop    = Math.max(vtop,    Math.floor(ext.top    / ts));
         vleft   = Math.max(vleft,   Math.floor(ext.left   / ts));
@@ -56,7 +56,7 @@ mlayer.layer.Tiles = mlayer.extend(mlayer.layer.BaseLayer, {
         if(vtop == vbottom || vleft == vright) return;
         if(cov.top != vtop || cov.left != vleft || cov.bottom != vbottom || cov.right != vright) {
             var html = '';
-            var z = vp.zoom;
+            var z = view.zoom;
             for(var x=vleft; x<vright; x++) {
                 for(var y=vtop; y<vbottom; y++) {
                     html += '<span style="position: absolute;'+
