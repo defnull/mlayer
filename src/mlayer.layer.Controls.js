@@ -25,11 +25,8 @@ mlayer.layer.Controls = mlayer.extend(mlayer.layer.BaseLayer, {
         this.joystick = jQuery('<div />').css({
             'background-image': 'url(/img/joystick.png)',
             'background-position': 'center center',
-            position: 'absolute',
-            top: '10px',
-            left: '10px',
-            width:'40px',
-            height:'40px'}).appendTo(this.dom)
+            position: 'absolute', top: '10px', left: '10px',
+            width:'48px', height:'48px'}).appendTo(this.dom)
 
         this.joystick_control = new mlayer.util.DragDrop({
             dom: this.joystick,
@@ -37,12 +34,16 @@ mlayer.layer.Controls = mlayer.extend(mlayer.layer.BaseLayer, {
                 self._joystick_interval = window.setInterval(function(){
                     var dx = Math.ceil((c.posCurrent[0] - c.posStart[0])/10);
                     var dy = Math.ceil((c.posCurrent[1] - c.posStart[1])/10);
+                    var px = (!dx) ? 'center' : ((dx > 0) ? 'right' : 'left')
+                    var py = (!dy) ? 'center' : ((dy > 0) ? 'bottom' : 'top')
+                    self.joystick.css('background-position', px+' '+py)
                     map.moveBy(dx, dy);
                 }, 50)
             },
             onDrop: function(c) {
                 window.clearInterval(self._joystick_interval);
                 self._joystick_interval = null;
+                self.joystick.css('background-position', 'center center')
             }
         })
 
