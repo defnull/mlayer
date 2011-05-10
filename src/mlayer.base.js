@@ -4,6 +4,7 @@ REQUIRE ../README.rst (yes, I am THAT lazy ;)
 
 mlayer = {}
 mlayer.layer = {}
+mlayer.util = {}
 mlayer.geometry = {}
 
 mlayer.extend = function(baseclass, override) {
@@ -83,7 +84,7 @@ mlayer.Map = function(node, config) {
      */
 
     this.autoclip = config.autoclip || true;
-    this.draw_interval = config.draw_interval || 200;
+    this.draw_interval = config.draw_interval || 500;
     this.zindex = config.zindex || 100;
 }
 

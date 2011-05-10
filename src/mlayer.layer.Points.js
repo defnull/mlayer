@@ -49,7 +49,7 @@ mlayer.layer.Points = mlayer.extend(mlayer.layer.BaseLayer, {
             var x = Math.round(p.x*scale) - 1
             var y = Math.round(p.y*scale) - 1
             html += '<span style="position: absolute; width:1px; height:1px;'+
-                    ' top: '+x+'px; left: '+y+'px;'+
+                    ' top: '+y+'px; left: '+x+'px;'+
                     ' border: 1px solid '+p.color+';">'+
                         '<span style="z-index: '+lz+'; display:none;'+
                         ' position: relative; top:5px; left:5px; width: 200px">'+
